@@ -1,4 +1,4 @@
-package com.camping101.beta.web.domain.camp.dto.campdetaildto;
+package com.camping101.beta.web.domain.camp.model.campdetaildto;
 
 import com.camping101.beta.db.entity.site.Site;
 import com.camping101.beta.db.entity.site.SiteCapacity;

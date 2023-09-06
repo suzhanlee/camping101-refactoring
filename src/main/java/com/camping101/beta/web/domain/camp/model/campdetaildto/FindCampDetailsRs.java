@@ -1,7 +1,6 @@
-package com.camping101.beta.web.domain.camp.dto.campdetaildto;
+package com.camping101.beta.web.domain.camp.model.campdetaildto;
 
-import com.camping101.beta.db.entity.camp.FacilityCnt;
-import com.camping101.beta.db.entity.camp.Location;
+import com.camping101.beta.db.entity.camp.CampLocation;
 import com.camping101.beta.db.entity.camp.ManageStatus;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,12 +14,12 @@ public class FindCampDetailsRs {
     private String name;
     private String intro;
     private ManageStatus manageStatus;
-    private Location location;
+    private CampLocation campLocation;
     private String tel;
     private String oneLineReserveYn;
     private String openSeason;
     private LocalDate openDateOfWeek;
-    private FacilityCnt facilityCnt;
+//    private FacilityCnt facilityCnt;
     private String facility;
     private String leisure;
     private String animalCapable;
@@ -33,20 +32,20 @@ public class FindCampDetailsRs {
 
 
     public FindCampDetailsRs(Long campId, String name, String intro, ManageStatus manageStatus,
-        Location location, String tel, String oneLineReserveYn, String openSeason,
-        LocalDate openDateOfWeek, FacilityCnt facilityCnt, String facility, String leisure,
+        CampLocation campLocation, String tel, String oneLineReserveYn, String openSeason,
+        LocalDate openDateOfWeek, String facility, String leisure,
         String animalCapable, String equipmentTools, String firstImage, String homepage,
         String businessNo) {
         this.campId = campId;
         this.name = name;
         this.intro = intro;
         this.manageStatus = manageStatus;
-        this.location = location;
+        this.campLocation = campLocation;
         this.tel = tel;
         this.oneLineReserveYn = oneLineReserveYn;
         this.openSeason = openSeason;
         this.openDateOfWeek = openDateOfWeek;
-        this.facilityCnt = facilityCnt;
+//        this.facilityCnt = facilityCnt;
         this.facility = facility;
         this.leisure = leisure;
         this.animalCapable = animalCapable;

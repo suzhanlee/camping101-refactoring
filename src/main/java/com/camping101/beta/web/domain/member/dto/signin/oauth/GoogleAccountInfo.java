@@ -26,7 +26,7 @@ public class GoogleAccountInfo implements Serializable {
 
     public Member toActivatedMember() {
         return Member.builder()
-            .profileImagePath(this.picture)
+//            .profileImagePath(this.picture)
             .email(this.email)
             .nickname(this.givenName)
             .signUpType(SignUpType.GOOGLE)

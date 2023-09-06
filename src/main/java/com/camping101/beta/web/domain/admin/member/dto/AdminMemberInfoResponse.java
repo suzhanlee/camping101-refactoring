@@ -32,7 +32,7 @@ public class AdminMemberInfoResponse {
     public static AdminMemberInfoResponse fromEntity(Member member) {
         return AdminMemberInfoResponse.builder()
             .memberId(member.getMemberId())
-            .image(member.getProfileImagePath())
+//            .image(member.getProfileImagePath())
             .email(member.getEmail())
             .nickname(member.getNickname())
             .phoneNumber(member.getPhoneNumber())

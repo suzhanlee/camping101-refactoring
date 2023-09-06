@@ -4,6 +4,7 @@ import static com.camping101.beta.db.entity.reservation.ReservationStatus.CANCEL
 
 import com.camping101.beta.db.entity.member.Member;
 import com.camping101.beta.db.entity.site.Site;
+import com.camping101.beta.global.exception.camp.CannotDeleteCampException;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +17,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -87,5 +87,11 @@ public class Reservation {
 
     public void addPayment(Long payment) {
         this.payment = payment;
+    }
+
+    public void isGreaterThanNow() {
+        if (startDate.isAfter(LocalDate.now())) {
+            throw new CannotDeleteCampException();
+        }
     }
 }

@@ -30,7 +30,7 @@ public class CommentInfoResponse {
             .commentId(comment.getCommentId())
             .writerEmail(comment.getMember().getEmail())
             .writerNickName(comment.getMember().getNickname())
-            .profileImagePath(comment.getMember().getProfileImagePath())
+//            .profileImagePath(comment.getMember().getProfileImagePath())
             .content(comment.getContent())
             .reComments(comment.getReComments().stream()
                 .map(ReCommentInfoResponse::fromEntity)

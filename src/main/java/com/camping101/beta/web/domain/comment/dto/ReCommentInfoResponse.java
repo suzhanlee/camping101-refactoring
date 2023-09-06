@@ -28,7 +28,7 @@ public class ReCommentInfoResponse {
             .reCommentId(reComment.getReCommentId())
             .writerEmail(reComment.getMember().getEmail())
             .writerNickName(reComment.getMember().getNickname())
-            .profileImagePath(reComment.getMember().getProfileImagePath())
+//            .profileImagePath(reComment.getMember().getProfileImagePath())
             .content(reComment.getContent())
             .createdAt(reComment.getCreatedAt())
             .build();

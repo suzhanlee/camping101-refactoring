@@ -59,7 +59,7 @@ public class CampLogService {
         CampLog newCampLog = campLogRepository.save(CampLog.from(request));
 
         Camp camp = site.getCamp();
-        camp.plusCampLogCnt();
+//        camp.plusCampLogCnt();
 
         try {
             List<String> imagePaths = saveImagesToS3AndGetPaths(request);
@@ -196,7 +196,7 @@ public class CampLogService {
         campLogRepository.delete(campLog);
 
         Camp camp = campLog.getSite().getCamp();
-        camp.minusCampLogCnt();
+//        camp.minusCampLogCnt();
 
     }
 

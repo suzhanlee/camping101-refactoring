@@ -1,9 +1,8 @@
-package com.camping101.beta.web.domain.camp.dto.content;
+package com.camping101.beta.web.domain.camp.model.content;
 
-import com.camping101.beta.web.domain.camp.dto.FindCampListRs;
+import com.camping101.beta.web.domain.camp.model.rs.FindCampListRs;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

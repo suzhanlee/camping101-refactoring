@@ -139,7 +139,7 @@ public class GoogleOAuthService implements OAuthService {
         if (optionalMember.isPresent()) {
             // 이미 가입한 경우 회원 프로필, 닉네임 업데이트
             Member member = optionalMember.get();
-            member.setProfileImagePath(googleAccountInfo.getPicture());
+//            member.setProfileImagePath(googleAccountInfo.getPicture());
             member.setNickname(googleAccountInfo.getName());
             return memberRepository.save(member);
         }

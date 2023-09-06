@@ -28,7 +28,7 @@ public class SignUpByEmailRequest {
 
     public Member toNotActivatedMember(String profileImagePath, String encPassword) {
         return Member.builder()
-            .profileImagePath(profileImagePath)
+//            .profileImagePath(profileImagePath)
             .email(this.email)
             .password(encPassword)
             .phoneNumber(this.phoneNumber)

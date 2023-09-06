@@ -1,8 +1,7 @@
-package com.camping101.beta.web.domain.camp.dto;
+package com.camping101.beta.web.domain.camp.model.rs;
 
 import com.camping101.beta.db.entity.camp.Camp;
-import com.camping101.beta.db.entity.camp.FacilityCnt;
-import com.camping101.beta.db.entity.camp.Location;
+import com.camping101.beta.db.entity.camp.CampLocation;
 import com.camping101.beta.db.entity.camp.ManageStatus;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
@@ -18,14 +17,14 @@ public class ModifyCampRs {
     private Long campId;
     private String intro;
     private ManageStatus manageStatus;
-    private Location location;
+    private CampLocation campLocation;
 
     private String tel;
     private String oneLineReserveYn;
 
     private String openSeason;
     private LocalDate openDateOfWeek;
-    private FacilityCnt facilityCnt;
+//    private FacilityCnt facilityCnt;
 
     private String facility;
     private String leisure;
@@ -42,18 +41,18 @@ public class ModifyCampRs {
             .campId(camp.getCampId())
             .intro(camp.getIntro())
             .manageStatus(camp.getManageStatus())
-            .location(camp.getLocation())
-            .tel(camp.getTel())
-            .oneLineReserveYn(camp.getOneLineReserveYn())
-            .openSeason(camp.getOpenSeason())
-            .openDateOfWeek(camp.getOpenDateOfWeek())
-            .facilityCnt(camp.getFacilityCnt())
-            .facility(camp.getFacility())
-            .leisure(camp.getLeisure())
-            .animalCapable(camp.getAnimalCapable())
-            .equipmentTools(camp.getEquipmentTools())
-            .firstImage(camp.getFirstImage())
-            .homepage(camp.getHomepage())
+            .campLocation(camp.getCampLocation())
+//            .tel(camp.getTel())
+//            .oneLineReserveYn(camp.getOneLineReserveYn())
+//            .openSeason(camp.getOpenSeason())
+//            .openDateOfWeek(camp.getOpenDateOfWeek())
+//            .facilityCnt(camp.getFacilityCnt())
+//            .facility(camp.getFacility())
+//            .leisure(camp.getLeisure())
+//            .animalCapable(camp.getAnimalCapable())
+//            .equipmentTools(camp.getEquipmentTools())
+//            .firstImage(camp.getFirstImage())
+//            .homepage(camp.getHomepage())
             .businessNo(camp.getBusinessNo())
             .build();
 

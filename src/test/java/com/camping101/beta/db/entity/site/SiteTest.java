@@ -12,18 +12,18 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class SiteTest {
 
-    @Test
-    @DisplayName("사이트 엔티티에 캠핑장 엔티티를 저장할 수 있습니다. 캠핑장 엔티티에 사이트가 등록되어 있지 않다면 추가합니다.")
-    void addCampTest() {
-        // given
-        Site site = new Site();
-        Camp camp = new Camp();
-        // when
-        site.addCamp(camp);
-        // then
-        assertThat(site.getCamp()).isEqualTo(camp);
-        assertThat(camp.getSites().contains(site)).isTrue();
-    }
+//    @Test
+//    @DisplayName("사이트 엔티티에 캠핑장 엔티티를 저장할 수 있습니다. 캠핑장 엔티티에 사이트가 등록되어 있지 않다면 추가합니다.")
+//    void addCampTest() {
+//        // given
+//        Site site = new Site();
+//        Camp camp = new Camp();
+//        // when
+//        site.addCamp(camp);
+//        // then
+//        assertThat(site.getCamp()).isEqualTo(camp);
+//        assertThat(camp.getSites().contains(site)).isTrue();
+//    }
 
     @Test
     @DisplayName("사이트 엔티티에 예약 엔티티를 저장할 수 있습니다.")

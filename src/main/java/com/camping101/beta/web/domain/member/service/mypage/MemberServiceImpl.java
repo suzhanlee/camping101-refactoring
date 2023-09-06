@@ -65,12 +65,12 @@ public class MemberServiceImpl implements MemberService {
         validateIfMemberIdMatchingWithPathMemberId(member.getMemberId(), memberId);
 
         String newPassword = getNewPassword(member.getPassword(), request);
-        String newProfileImagePath = getNewProfileImagePath(member.getProfileImagePath(), request);
+//        String newProfileImagePath = getNewProfileImagePath(member.getProfileImagePath(), request);
         String newNickname = getNewNickname(member.getNickname(), request);
         String newPhoneNumber = getNewPhoneNumber(member.getPhoneNumber(), request);
 
         member.setPassword(newPassword);
-        member.setProfileImagePath(newProfileImagePath);
+//        member.setProfileImagePath(newProfileImagePath);
         member.setNickname(newNickname);
         member.setPhoneNumber(newPhoneNumber);
 

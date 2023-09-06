@@ -31,7 +31,7 @@ public class MemberInfoResponse implements Serializable {
     public static MemberInfoResponse fromEntity(Member member) {
         return MemberInfoResponse.builder()
             .memberId(member.getMemberId())
-            .image(member.getProfileImagePath())
+//            .image(member.getProfileImagePath())
             .email(member.getEmail())
             .nickname(member.getNickname())
             .phoneNumber(member.getPhoneNumber())

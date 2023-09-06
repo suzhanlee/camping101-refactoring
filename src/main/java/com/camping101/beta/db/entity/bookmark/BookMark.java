@@ -29,6 +29,7 @@ public class BookMark {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_mark_id")
     private Long bookMarkId;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
