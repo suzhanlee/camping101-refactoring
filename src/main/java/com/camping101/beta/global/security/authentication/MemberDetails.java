@@ -42,10 +42,6 @@ public class MemberDetails implements UserDetails {
         return member.getPassword();
     }
 
-    public String getProfileImagePath() {
-        return member.getProfileImagePath();
-    }
-
     public String getNickname() {
         return member.getNickname();
     }
@@ -70,9 +66,9 @@ public class MemberDetails implements UserDetails {
         this.member.setPhoneNumber(phoneNumber);
     }
 
-    public void setProfileImagePath(String profileImagePath) {
-        this.member.setProfileImagePath(profileImagePath);
-    }
+//    public void setProfileImagePath(String profileImagePath) {
+//        this.member.setProfileImagePath(profileImagePath);
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

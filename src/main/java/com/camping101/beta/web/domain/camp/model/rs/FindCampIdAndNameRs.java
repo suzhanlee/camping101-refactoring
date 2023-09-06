@@ -1,4 +1,4 @@
-package com.camping101.beta.web.domain.camp.dto;
+package com.camping101.beta.web.domain.camp.model.rs;
 
 import com.camping101.beta.db.entity.camp.Camp;
 import lombok.Builder;

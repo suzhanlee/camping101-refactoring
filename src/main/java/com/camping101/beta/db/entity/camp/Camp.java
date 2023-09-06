@@ -1,19 +1,20 @@
 package com.camping101.beta.db.entity.camp;
 
+import static com.camping101.beta.db.entity.camp.ManageStatus.UNAUTHORIZED;
 import static javax.persistence.EnumType.STRING;
 
+import com.camping101.beta.db.entity.BaseEntity;
+import com.camping101.beta.db.entity.attachfile.AttachFile;
+import com.camping101.beta.db.entity.camp.enums.AnimalCapabilityType;
+import com.camping101.beta.db.entity.camp.enums.CampReservationType;
 import com.camping101.beta.db.entity.campauth.CampAuth;
 import com.camping101.beta.db.entity.member.Member;
 import com.camping101.beta.db.entity.site.Site;
-import com.camping101.beta.web.domain.camp.dto.ModifyCampRq;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,20 +23,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import javax.persistence.OneToOne;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@EntityListeners(AuditingEntityListener.class)
-public class Camp {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Camp extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,89 +41,146 @@ public class Camp {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String intro;
 
+    @Column(nullable = false)
+    private String phoneNumber;
+
+    @Column(nullable = false)
+    private String businessNo;
+
+    @Column(nullable = false)
+    private CampReservationType campReservationType;
+
     @Enumerated(STRING)
+    @Column(nullable = false)
+    private AnimalCapabilityType animalCapabilityType;
+
+    @Enumerated(STRING)
+    @Column(nullable = false)
     private ManageStatus manageStatus;
 
-    @Embedded
-    private Location location;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "attchFile_id")
+    private AttachFile firstImage;
 
-    private String tel;
-    private String oneLineReserveYn; // 데이터 확인하기 (불리언으로 데이터를 줄것같지 않다.)
+    @OneToOne(mappedBy = "camp")
+    private CampLocation campLocation;
 
-    private String openSeason;
-    private LocalDate openDateOfWeek;
+    @OneToOne(mappedBy = "camp")
+    private CampDetail campDetail;
 
-    @Embedded
-    private FacilityCnt facilityCnt;
+    @OneToMany(mappedBy = "camp")
+    private List<CampOpenSeason> campOpenSeasons = new ArrayList<>();
 
-    private String facility;
-    private String leisure;
-    private String animalCapable;
-    private String equipmentTools;
-    private String firstImage;
-    private String homepage;
-    private String businessNo;
-    private Long campLogCnt;
+    @OneToMany(mappedBy = "camp")
+    private List<CampOpenDay> campOpenDays = new ArrayList<>();
 
-    @CreatedDate
-    @Column(updatable = false, insertable = true)
-    private LocalDate createdAt;
+    @OneToMany(mappedBy = "camp")
+    private List<CampFacility> campFacilities = new ArrayList<>();
 
-//    @Builder.Default
     @OneToMany(mappedBy = "camp", cascade = CascadeType.REMOVE)
     private List<Site> sites = new ArrayList<>();
 
     @OneToMany(mappedBy = "camp", cascade = CascadeType.REMOVE)
     private List<CampAuth> campAuthList = new ArrayList<>();
 
-    public Camp modifyCamp(ModifyCampRq modifyCampRq) {
+    public static Camp createUnAuthorizedCamp(String name, String intro, String phoneNumber, String businessNo,
+        String campReservationType, String animalCapabilityType) {
+        Camp camp = new Camp();
+        camp.name = name;
+        camp.intro = intro;
+        camp.phoneNumber = phoneNumber;
+        camp.businessNo = businessNo;
+        camp.manageStatus = UNAUTHORIZED;
+        camp.campReservationType = CampReservationType.valueOf(campReservationType);
+        camp.animalCapabilityType = AnimalCapabilityType.valueOf(animalCapabilityType);
+        return camp;
+    }
 
-        this.campId = modifyCampRq.getCampId();
-        this.intro = modifyCampRq.getIntro();
-        this.location = modifyCampRq.getLocation();
-        this.tel = modifyCampRq.getTel();
-        this.oneLineReserveYn = modifyCampRq.getOneLineReserveYn();
-        this.openSeason = modifyCampRq.getOpenSeason();
-        this.openDateOfWeek = modifyCampRq.getOpenDateOfWeek();
-        this.facilityCnt = modifyCampRq.getFacilityCnt();
-        this.facility = modifyCampRq.getFacility();
-        this.leisure = modifyCampRq.getLeisure();
-        this.animalCapable = modifyCampRq.getAnimalCapable();
-        this.equipmentTools = modifyCampRq.getEquipmentTools();
-        this.firstImage = modifyCampRq.getFirstImage();
-        this.homepage = modifyCampRq.getHomepage();
-        this.businessNo = modifyCampRq.getBusinessNo();
+    public static Camp createMockCamp(String name, String intro, String phoneNumber, String businessNo,
+        String campReservationType, String animalCapabilityType) {
+        Camp camp = new Camp();
+        camp.campId = 1L;
+        camp.name = name;
+        camp.intro = intro;
+        camp.phoneNumber = phoneNumber;
+        camp.businessNo = businessNo;
+        camp.manageStatus = UNAUTHORIZED;
+        camp.campReservationType = CampReservationType.valueOf(campReservationType);
+        camp.animalCapabilityType = AnimalCapabilityType.valueOf(animalCapabilityType);
+        return camp;
+    }
 
-        return this;
+    public void modifyCamp(String name, String intro, String phoneNumber, String businessNo,
+        String campReservationType, String animalCapabilityType) {
+        this.name = name;
+        this.intro = intro;
+        this.phoneNumber = phoneNumber;
+        this.businessNo = businessNo;
+        this.manageStatus = UNAUTHORIZED;
+        this.campReservationType = CampReservationType.valueOf(campReservationType);
+        this.animalCapabilityType = AnimalCapabilityType.valueOf(animalCapabilityType);
+    }
 
+    public void addFirstImage(AttachFile firstImage) {
+        this.firstImage = firstImage;
     }
 
     public void addMember(Member member) {
         this.member = member;
     }
 
+    public void addCampLocation(CampLocation campLocation) {
+        if (campLocation.getCamp() == null) {
+            campLocation.addCamp(this);
+        }
+        this.campLocation = campLocation;
+    }
+
+    public void addCampDetail(CampDetail campDetail) {
+        if (campDetail.getCamp() == null) {
+            campDetail.addCamp(this);
+        }
+        this.campDetail = campDetail;
+    }
+
+    public void addCampOpenSeasonList(List<CampOpenSeason> campOpenSeasonList) {
+        campOpenSeasonList.stream().filter(campOpenSeason -> campOpenSeason.getCamp() == null)
+            .forEach(campOpenSeason -> campOpenSeason.addCamp(this));
+        this.campOpenSeasons = campOpenSeasonList;
+    }
+
+    public void addCampOpenDayList(List<CampOpenDay> campOpenDayList) {
+        campOpenDayList.stream().filter(campOpenSeason -> campOpenSeason.getCamp() == null)
+            .forEach(campOpenSeason -> campOpenSeason.addCamp(this));
+        this.campOpenDays = campOpenDayList;
+    }
+
+    public void addCampFacilityList(List<CampFacility> campFacilityList) {
+        campFacilityList.stream().filter(campOpenSeason -> campOpenSeason.getCamp() == null)
+            .forEach(campOpenSeason -> campOpenSeason.addCamp(this));
+        this.campFacilities = campFacilityList;
+    }
+
+    public CampAuth requestAuthorization() {
+        return CampAuth.createCampAuth(this);
+    }
+
+    //============== NOT YET REFACTORING ===================
+
     public void editManageStatus() {
         this.manageStatus = ManageStatus.AUTHORIZED;
 
     }
 
-    public void plusCampLogCnt() {
-        this.campLogCnt++;
-    }
-
-    public void minusCampLogCnt() {
-        if (campLogCnt <= 0) {
-            campLogCnt = 0L;
-            return;
-        }
-        campLogCnt--;
-    }
-
     public void addSite(Site site) {
         sites.add(site);
     }
+
 }

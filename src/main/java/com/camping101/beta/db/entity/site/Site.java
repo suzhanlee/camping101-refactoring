@@ -104,4 +104,10 @@ public class Site {
     public void changeOpenYn() {
         this.openYn = !this.openYn;
     }
+
+    public void hasReservation() {
+        for (Reservation reservation : reservationList) {
+            reservation.isGreaterThanNow();
+        }
+    }
 }
