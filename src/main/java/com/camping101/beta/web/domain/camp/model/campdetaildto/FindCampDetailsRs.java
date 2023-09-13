@@ -1,7 +1,7 @@
 package com.camping101.beta.web.domain.camp.model.campdetaildto;
 
 import com.camping101.beta.db.entity.camp.CampLocation;
-import com.camping101.beta.db.entity.camp.ManageStatus;
+import com.camping101.beta.db.entity.camp.enums.CampManageStatus;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class FindCampDetailsRs {
     private Long campId;
     private String name;
     private String intro;
-    private ManageStatus manageStatus;
+    private CampManageStatus campManageStatus;
     private CampLocation campLocation;
     private String tel;
     private String oneLineReserveYn;
@@ -31,7 +31,7 @@ public class FindCampDetailsRs {
     private List<CampLogInCamp> campLogInCampList = new ArrayList<>();
 
 
-    public FindCampDetailsRs(Long campId, String name, String intro, ManageStatus manageStatus,
+    public FindCampDetailsRs(Long campId, String name, String intro, CampManageStatus campManageStatus,
         CampLocation campLocation, String tel, String oneLineReserveYn, String openSeason,
         LocalDate openDateOfWeek, String facility, String leisure,
         String animalCapable, String equipmentTools, String firstImage, String homepage,
@@ -39,7 +39,7 @@ public class FindCampDetailsRs {
         this.campId = campId;
         this.name = name;
         this.intro = intro;
-        this.manageStatus = manageStatus;
+        this.campManageStatus = campManageStatus;
         this.campLocation = campLocation;
         this.tel = tel;
         this.oneLineReserveYn = oneLineReserveYn;

@@ -1,9 +1,8 @@
-package com.camping101.beta.web.domain.site.dto;
+package com.camping101.beta.web.domain.site.model;
 
 import com.camping101.beta.db.entity.site.Site;
 import com.camping101.beta.db.entity.site.SiteCapacity;
-import com.camping101.beta.db.entity.site.SiteType;
-import com.camping101.beta.db.entity.site.SiteYn;
+import com.camping101.beta.db.entity.site.enums.SiteType;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,16 +11,17 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class ModifySiteRs {
+public class CreateSiteRs {
 
     private Long siteId;
     private Long campId;
+
     private String name;
     private String rpImage; //대표 이미지
     private String introduction;
     private SiteType type;
     private boolean openYn;
-    private SiteYn siteYn;
+//    private SiteYn siteYn;
 
 
     private LocalDate checkIn; // 체크 인 시간
@@ -35,27 +35,28 @@ public class ModifySiteRs {
     private int price;
     private LocalDate refundableDate;
 
-    public static ModifySiteRs createModifySiteRs(Site site) {
+    public static CreateSiteRs createSiteRs(Site site) {
 
-        return ModifySiteRs.builder()
+        return CreateSiteRs.builder()
             .siteId(site.getSiteId())
             .campId(site.getCamp().getCampId())
             .name(site.getName())
-            .rpImage(site.getRpImage())
-            .introduction(site.getIntroduction())
-            .type(site.getType())
-            .openYn(site.isOpenYn())
-            .siteYn(site.getSiteYn())
-            .checkIn(site.getCheckIn())
-            .checkOut(site.getCheckOut())
-            .leastScheduling(site.getLeastScheduling())
-            .siteCapacity(site.getSiteCapacity())
-            .mapImage(site.getMapImage())
-            .policy(site.getPolicy())
-            .price(site.getPrice())
-            .refundableDate(site.getRefundableDate())
+//            .rpImage(site.getRpImage())
+//            .introduction(site.getIntroduction())
+//            .type(site.getSiteType())
+//            .openYn(site.isOpenYn())
+//            .siteYn(site.getSiteYn())
+//            .checkIn(site.getCheckIn())
+//            .checkOut(site.getCheckOut())
+//            .leastScheduling(site.getLeastScheduling())
+//            .siteCapacity(site.getSiteCapacity())
+//            .mapImage(site.getMapImage())
+//            .policy(site.getPolicy())
+//            .price(site.getPrice())
+//            .refundableDate(site.getRefundableDate())
             .build();
 
     }
+
 
 }

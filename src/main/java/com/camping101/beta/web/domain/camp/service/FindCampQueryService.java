@@ -1,6 +1,6 @@
 //package com.camping101.beta.web.domain.camp.service;
 //
-//import static com.camping101.beta.db.entity.camp.ManageStatus.AUTHORIZED;
+//import static com.camping101.beta.db.entity.camp.enums.ManageStatus.AUTHORIZED;
 //import static com.camping101.beta.db.entity.camp.QCamp.camp;
 //import static com.camping101.beta.db.entity.camplog.QCampLog.campLog;
 //import static com.camping101.beta.db.entity.member.QMember.member;

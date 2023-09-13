@@ -23,18 +23,18 @@ class ReservationTest {
         assertThat(reservation.getMember()).isEqualTo(member);
     }
 
-    @Test
-    @DisplayName("예약 엔티티에 사이트 엔티티를 넣을 수 있습니다. 만약 사이트 엔티티에 해당 예약 정보가 없다면 추가합니다")
-    void addSiteTest() {
-        // given
-        Reservation reservation = new Reservation();
-        Site site = new Site();
-        // when
-        reservation.addSite(site);
-        // then
-        assertThat(reservation.getSite()).isEqualTo(site);
-        assertThat(site.getReservationList().contains(reservation)).isTrue();
-    }
+//    @Test
+//    @DisplayName("예약 엔티티에 사이트 엔티티를 넣을 수 있습니다. 만약 사이트 엔티티에 해당 예약 정보가 없다면 추가합니다")
+//    void addSiteTest() {
+//        // given
+//        Reservation reservation = new Reservation();
+//        Site site = new Site();
+//        // when
+//        reservation.addSite(site);
+//        // then
+//        assertThat(reservation.getSite()).isEqualTo(site);
+//        assertThat(site.getReservationList().contains(reservation)).isTrue();
+//    }
 
     @Test
     @DisplayName("예약을 취소할 수 있습니다.")

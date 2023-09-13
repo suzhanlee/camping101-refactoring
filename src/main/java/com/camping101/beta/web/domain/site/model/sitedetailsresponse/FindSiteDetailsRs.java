@@ -1,9 +1,8 @@
-package com.camping101.beta.web.domain.site.dto.sitedetailsresponse;
+package com.camping101.beta.web.domain.site.model.sitedetailsresponse;
 
 import com.camping101.beta.db.entity.site.Site;
 import com.camping101.beta.db.entity.site.SiteCapacity;
-import com.camping101.beta.db.entity.site.SiteType;
-import com.camping101.beta.db.entity.site.SiteYn;
+import com.camping101.beta.db.entity.site.enums.SiteType;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +20,7 @@ public class FindSiteDetailsRs {
     private String introduction;
     private SiteType type;
     private boolean openYn; // 이거를 활성화, 비활성화 , 탈퇴상태로 바꿀까?
-    private SiteYn siteYn;
+//    private SiteYn siteYn;
     private LocalDate checkIn;
     private LocalDate checkOut;
     private int leastScheduling;
@@ -40,19 +39,19 @@ public class FindSiteDetailsRs {
             .siteId(site.getSiteId())
             .campId(site.getCamp().getCampId())
             .name(site.getName())
-            .rpImage(site.getRpImage())
-            .introduction(site.getIntroduction())
-            .type(site.getType())
-            .openYn(site.isOpenYn())
-            .siteYn(site.getSiteYn())
-            .checkIn(site.getCheckIn())
-            .checkOut(site.getCheckOut())
-            .leastScheduling(site.getLeastScheduling())
-            .siteCapacity(site.getSiteCapacity())
-            .mapImage(site.getMapImage())
-            .policy(site.getPolicy())
-            .price(site.getPrice())
-            .refundableDate(site.getRefundableDate())
+//            .rpImage(site.getRpImage())
+//            .introduction(site.getIntroduction())
+//            .type(site.getSiteType())
+//            .openYn(site.isOpenYn())
+//            .siteYn(site.getSiteYn())
+//            .checkIn(site.getCheckIn())
+//            .checkOut(site.getCheckOut())
+//            .leastScheduling(site.getLeastScheduling())
+//            .siteCapacity(site.getSiteCapacity())
+//            .mapImage(site.getMapImage())
+//            .policy(site.getPolicy())
+//            .price(site.getPrice())
+//            .refundableDate(site.getRefundableDate())
             .build();
 
     }

@@ -2,7 +2,7 @@ package com.camping101.beta.web.domain.camp.model.rs;
 
 import com.camping101.beta.db.entity.camp.Camp;
 import com.camping101.beta.db.entity.camp.CampLocation;
-import com.camping101.beta.db.entity.camp.ManageStatus;
+import com.camping101.beta.db.entity.camp.enums.CampManageStatus;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +16,7 @@ public class ModifyCampRs {
     private Long memberId;
     private Long campId;
     private String intro;
-    private ManageStatus manageStatus;
+    private CampManageStatus campManageStatus;
     private CampLocation campLocation;
 
     private String tel;
@@ -40,7 +40,7 @@ public class ModifyCampRs {
             .memberId(camp.getMember().getMemberId())
             .campId(camp.getCampId())
             .intro(camp.getIntro())
-            .manageStatus(camp.getManageStatus())
+            .campManageStatus(camp.getCampManageStatus())
             .campLocation(camp.getCampLocation())
 //            .tel(camp.getTel())
 //            .oneLineReserveYn(camp.getOneLineReserveYn())

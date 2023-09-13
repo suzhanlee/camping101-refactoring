@@ -17,6 +17,8 @@ import static org.assertj.core.api.Assertions.tuple;
 
 import com.camping101.beta.db.entity.attachfile.AttachFile;
 import com.camping101.beta.db.entity.campauth.CampAuth;
+import com.camping101.beta.db.entity.site.Site;
+import java.time.LocalTime;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -186,5 +188,23 @@ class CampTest {
         // then
         assertThat(campAuth.getCamp()).isEqualTo(camp);
         assertThat(campAuth.getCampAuthStatus()).isEqualTo(UNAUTHORIZED);
+    }
+
+    @Test
+    @DisplayName("캠핑장에 사이트를, 사이트에 캠핑장을 연결할 수 있다.")
+    void addSiteTest(){
+        // given
+        Camp camp = createUnAuthorizedCamp("수원캠핑장", "수원캠핑장입니다!", "010-1234-5678",
+            "사업자번호", "ONLINE", "PERMISSION");
+
+        Site site = Site.create("글램핑장", "수원캠핑장의 글램핑장입니다!", "GLAMP", "CLOSED",
+            15000, LocalTime.of(9,0), LocalTime.of(12,0), 1);
+
+        // when
+        camp.addSite(site);
+
+        // then
+        assertThat(camp.getSites().get(0)).isEqualTo(site);
+        assertThat(site.getCamp()).isEqualTo(camp);
     }
 }

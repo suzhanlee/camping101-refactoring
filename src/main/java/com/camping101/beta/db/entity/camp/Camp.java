@@ -1,11 +1,12 @@
 package com.camping101.beta.db.entity.camp;
 
-import static com.camping101.beta.db.entity.camp.ManageStatus.UNAUTHORIZED;
+import static com.camping101.beta.db.entity.camp.enums.CampManageStatus.UNAUTHORIZED;
 import static javax.persistence.EnumType.STRING;
 
 import com.camping101.beta.db.entity.BaseEntity;
 import com.camping101.beta.db.entity.attachfile.AttachFile;
 import com.camping101.beta.db.entity.camp.enums.AnimalCapabilityType;
+import com.camping101.beta.db.entity.camp.enums.CampManageStatus;
 import com.camping101.beta.db.entity.camp.enums.CampReservationType;
 import com.camping101.beta.db.entity.campauth.CampAuth;
 import com.camping101.beta.db.entity.member.Member;
@@ -63,7 +64,7 @@ public class Camp extends BaseEntity {
 
     @Enumerated(STRING)
     @Column(nullable = false)
-    private ManageStatus manageStatus;
+    private CampManageStatus campManageStatus;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attchFile_id")
@@ -90,20 +91,22 @@ public class Camp extends BaseEntity {
     @OneToMany(mappedBy = "camp", cascade = CascadeType.REMOVE)
     private List<CampAuth> campAuthList = new ArrayList<>();
 
-    public static Camp createUnAuthorizedCamp(String name, String intro, String phoneNumber, String businessNo,
+    public static Camp createUnAuthorizedCamp(String name, String intro, String phoneNumber,
+        String businessNo,
         String campReservationType, String animalCapabilityType) {
         Camp camp = new Camp();
         camp.name = name;
         camp.intro = intro;
         camp.phoneNumber = phoneNumber;
         camp.businessNo = businessNo;
-        camp.manageStatus = UNAUTHORIZED;
+        camp.campManageStatus = UNAUTHORIZED;
         camp.campReservationType = CampReservationType.valueOf(campReservationType);
         camp.animalCapabilityType = AnimalCapabilityType.valueOf(animalCapabilityType);
         return camp;
     }
 
-    public static Camp createMockCamp(String name, String intro, String phoneNumber, String businessNo,
+    public static Camp createMockCamp(String name, String intro, String phoneNumber,
+        String businessNo,
         String campReservationType, String animalCapabilityType) {
         Camp camp = new Camp();
         camp.campId = 1L;
@@ -111,7 +114,7 @@ public class Camp extends BaseEntity {
         camp.intro = intro;
         camp.phoneNumber = phoneNumber;
         camp.businessNo = businessNo;
-        camp.manageStatus = UNAUTHORIZED;
+        camp.campManageStatus = UNAUTHORIZED;
         camp.campReservationType = CampReservationType.valueOf(campReservationType);
         camp.animalCapabilityType = AnimalCapabilityType.valueOf(animalCapabilityType);
         return camp;
@@ -123,7 +126,7 @@ public class Camp extends BaseEntity {
         this.intro = intro;
         this.phoneNumber = phoneNumber;
         this.businessNo = businessNo;
-        this.manageStatus = UNAUTHORIZED;
+        this.campManageStatus = UNAUTHORIZED;
         this.campReservationType = CampReservationType.valueOf(campReservationType);
         this.animalCapabilityType = AnimalCapabilityType.valueOf(animalCapabilityType);
     }
@@ -172,15 +175,17 @@ public class Camp extends BaseEntity {
         return CampAuth.createCampAuth(this);
     }
 
-    //============== NOT YET REFACTORING ===================
-
-    public void editManageStatus() {
-        this.manageStatus = ManageStatus.AUTHORIZED;
-
-    }
-
     public void addSite(Site site) {
+        if (site.getCamp() == null) {
+            site.addCamp(this);
+        }
         sites.add(site);
     }
 
+    //============== NOT YET REFACTORING ===================
+
+    public void editManageStatus() {
+        this.campManageStatus = CampManageStatus.AUTHORIZED;
+
+    }
 }

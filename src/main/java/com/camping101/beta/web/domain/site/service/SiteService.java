@@ -6,10 +6,9 @@ import com.camping101.beta.db.entity.reservation.ReservationStatus;
 import com.camping101.beta.db.entity.site.Site;
 import com.camping101.beta.global.exception.camp.CannotDeleteCampException;
 import com.camping101.beta.web.domain.camp.service.FindCampService;
-import com.camping101.beta.web.domain.site.dto.CreateSiteRq;
-import com.camping101.beta.web.domain.site.dto.CreateSiteRs;
-import com.camping101.beta.web.domain.site.dto.ModifySiteRq;
-import com.camping101.beta.web.domain.site.dto.ModifySiteRs;
+import com.camping101.beta.web.domain.site.model.CreateSiteRq;
+import com.camping101.beta.web.domain.site.model.ModifySiteRq;
+import com.camping101.beta.web.domain.site.model.ModifySiteRs;
 import com.camping101.beta.web.domain.site.repository.SiteRepository;
 import java.time.LocalDate;
 import java.util.List;
@@ -30,38 +29,38 @@ public class SiteService {
 
     // 사이트 생성
     // 사이트가 실제로 보이려면 openYn을 사이트 수정에서 활성화시켜줘야 한다.
-    public CreateSiteRs registerSite(CreateSiteRq rq) {
+    public Long saveSite(CreateSiteRq rq) {
 
-        Site site = CreateSiteRq.createSite(rq);
+        Site site = rq.toEntity();
 
         siteRepository.save(site);
 
         Camp camp = findCampService.findCampOrElseThrow(rq.getCampId());
 
-        site.addCamp(camp); // 변경감지로 넣기
+        site.addCamp(camp);
 
-        return CreateSiteRs.createSiteRs(site);
+        return site.getSiteId();
     }
 
 
     // 사이트 노출 상태 바꾸기 (주인기능) => 주인이 자신의 캠핑장의 사이트들을 목록 조회하면 그 이후
     // 체크박스를 통해 사이트들의 노출상태를 한번에 변경할 수 있음.
     // 만약 해당 사이트에 예약이 아직 존재한다면, 노출 상태를 변경할 수 없다.
-    public void changeOpenYnTrue(List<Long> siteIds) {
-
-        for (Long siteId : siteIds) {
-            Site findSite = findSiteService.findSiteOrElseThrow(siteId);
-            if (!findSite.isOpenYn()) {
-                findSite.changeOpenYn();
-            }
-
-            boolean isReservedSiteExist = isSiteReserved(siteId);
-
-            if (!isReservedSiteExist) {
-                findSite.changeOpenYn();
-            }
-        }
-    }
+//    public void changeOpenYnTrue(List<Long> siteIds) {
+//
+//        for (Long siteId : siteIds) {
+//            Site findSite = findSiteService.findSiteOrElseThrow(siteId);
+//            if (!findSite.isOpenYn()) {
+//                findSite.changeOpenYn();
+//            }
+//
+//            boolean isReservedSiteExist = isSiteReserved(siteId);
+//
+//            if (!isReservedSiteExist) {
+//                findSite.changeOpenYn();
+//            }
+//        }
+//    }
 
 
     // 사이트 수정

@@ -1,11 +1,8 @@
 package com.camping101.beta.db.entity.site;
 
-import static javax.persistence.EnumType.STRING;
-
-import com.camping101.beta.db.entity.site.enums.SiteCapacityType;
+import com.camping101.beta.db.entity.site.enums.SiteCapabilityType;
 import java.util.Objects;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,36 +13,35 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SiteCapacity {
+public class SiteCapability {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Enumerated(STRING)
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private SiteCapacityType siteCapacityType;
+    private SiteCapabilityType siteCapabilityType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "site_id")
     private Site site;
 
-    public SiteCapacity(SiteCapacityType siteCapacityType) {
-        this.siteCapacityType = siteCapacityType;
+    public SiteCapability(SiteCapabilityType siteCapabilityType) {
+        this.siteCapabilityType = siteCapabilityType;
     }
 
-    public static SiteCapacity create(String siteCapacityType) {
-        SiteCapacity siteCapacity = new SiteCapacity();
-        siteCapacity.siteCapacityType = SiteCapacityType.valueOf(siteCapacityType);
-        return siteCapacity;
+    public static SiteCapability create(String siteCapabilityType) {
+        SiteCapability siteCapability = new SiteCapability();
+        siteCapability.siteCapabilityType = SiteCapabilityType.valueOf(siteCapabilityType);
+        return siteCapability;
     }
 
     public void addSite(Site site) {
@@ -60,12 +56,12 @@ public class SiteCapacity {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SiteCapacity that = (SiteCapacity) o;
-        return getSiteCapacityType() == that.getSiteCapacityType();
+        SiteCapability that = (SiteCapability) o;
+        return getSiteCapabilityType() == that.getSiteCapabilityType();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSiteCapacityType());
+        return Objects.hash(getSiteCapabilityType());
     }
 }

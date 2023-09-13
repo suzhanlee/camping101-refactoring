@@ -1,51 +1,47 @@
 package com.camping101.beta.db.entity.site;
 
-import static javax.persistence.EnumType.STRING;
-
-import com.camping101.beta.db.entity.site.enums.SiteCapacityType;
 import java.util.Objects;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SiteCapacity {
+public class SiteDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Enumerated(STRING)
     @Column(nullable = false)
-    private SiteCapacityType siteCapacityType;
+    private Integer refundableDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private String policy;
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "site_id")
     private Site site;
 
-    public SiteCapacity(SiteCapacityType siteCapacityType) {
-        this.siteCapacityType = siteCapacityType;
+    public SiteDetail(Integer refundableDate, String policy) {
+        this.refundableDate = refundableDate;
+        this.policy = policy;
     }
 
-    public static SiteCapacity create(String siteCapacityType) {
-        SiteCapacity siteCapacity = new SiteCapacity();
-        siteCapacity.siteCapacityType = SiteCapacityType.valueOf(siteCapacityType);
-        return siteCapacity;
+    public static SiteDetail create(int refundableDate, String policy) {
+        SiteDetail siteDetail = new SiteDetail();
+        siteDetail.refundableDate = refundableDate;
+        siteDetail.policy = policy;
+        return siteDetail;
     }
 
     public void addSite(Site site) {
@@ -60,12 +56,13 @@ public class SiteCapacity {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        SiteCapacity that = (SiteCapacity) o;
-        return getSiteCapacityType() == that.getSiteCapacityType();
+        SiteDetail that = (SiteDetail) o;
+        return Objects.equals(getRefundableDate(), that.getRefundableDate())
+            && Objects.equals(getPolicy(), that.getPolicy());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSiteCapacityType());
+        return Objects.hash(getRefundableDate(), getPolicy());
     }
 }

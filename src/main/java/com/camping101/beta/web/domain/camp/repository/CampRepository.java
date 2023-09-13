@@ -1,7 +1,6 @@
 package com.camping101.beta.web.domain.camp.repository;
 
 import com.camping101.beta.db.entity.camp.Camp;
-import com.camping101.beta.db.entity.camp.ManageStatus;
 import com.camping101.beta.db.entity.member.Member;
 import java.util.List;
 import org.springframework.data.domain.Page;

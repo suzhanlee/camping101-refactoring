@@ -1,12 +1,12 @@
 package com.camping101.beta.web.domain.site.controller;
 
 import com.camping101.beta.global.path.ApiPath;
-import com.camping101.beta.web.domain.site.dto.CreateSiteRq;
-import com.camping101.beta.web.domain.site.dto.CreateSiteRs;
-import com.camping101.beta.web.domain.site.dto.FindSiteListByCampIdRs;
-import com.camping101.beta.web.domain.site.dto.ModifySiteRq;
-import com.camping101.beta.web.domain.site.dto.ModifySiteRs;
-import com.camping101.beta.web.domain.site.dto.sitedetailsresponse.FindSiteDetailsRs;
+import com.camping101.beta.web.domain.site.model.CreateSiteRq;
+import com.camping101.beta.web.domain.site.model.CreateSiteRs;
+import com.camping101.beta.web.domain.site.model.FindSiteListByCampIdRs;
+import com.camping101.beta.web.domain.site.model.ModifySiteRq;
+import com.camping101.beta.web.domain.site.model.ModifySiteRs;
+import com.camping101.beta.web.domain.site.model.sitedetailsresponse.FindSiteDetailsRs;
 import com.camping101.beta.web.domain.site.service.FindSiteService;
 import com.camping101.beta.web.domain.site.service.SiteService;
 import io.swagger.annotations.Api;
@@ -30,9 +30,8 @@ public class SiteController {
 
     // 사이트 생성 => 최초 생성시 웹사이트에 공개하지 않음
     @PostMapping(ApiPath.SITE)
-    public CreateSiteRs siteAdd(
-        @RequestBody CreateSiteRq createSiteRq) {
-        return siteService.registerSite(createSiteRq);
+    public Long siteAdd(@RequestBody CreateSiteRq createSiteRq) {
+        return siteService.saveSite(createSiteRq);
     }
 
 

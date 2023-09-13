@@ -1,10 +1,9 @@
-package com.camping101.beta.web.domain.site.dto;
+package com.camping101.beta.web.domain.site.model;
 
 import com.camping101.beta.db.entity.site.Site;
 import com.camping101.beta.db.entity.site.SiteCapacity;
-import com.camping101.beta.db.entity.site.SiteType;
-import com.camping101.beta.db.entity.site.SiteYn;
-import com.camping101.beta.web.domain.site.dto.sitedetailsresponse.CampLogDto;
+import com.camping101.beta.db.entity.site.enums.SiteType;
+import com.camping101.beta.web.domain.site.model.sitedetailsresponse.CampLogDto;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +19,7 @@ public class SiteDetailsOwnerResponse {
     private String introduction;
     private SiteType type;
     private boolean openYn; // 이거를 활성화, 비활성화 , 탈퇴상태로 바꿀까?
-    private SiteYn siteYn;
+//    private SiteYn siteYn;
     private LocalDate checkIn;
     private LocalDate checkOut;
     private int leastScheduling;
@@ -35,19 +34,19 @@ public class SiteDetailsOwnerResponse {
         this.siteId = site.getSiteId();
         this.campId = site.getCamp().getCampId();
         this.name = site.getName();
-        this.rpImage = site.getRpImage();
-        this.introduction = site.getIntroduction();
-        this.type = site.getType();
-        this.openYn = site.isOpenYn();
-        this.siteYn = site.getSiteYn();
-        this.checkIn = site.getCheckIn();
-        this.checkOut = site.getCheckOut();
-        this.leastScheduling = site.getLeastScheduling();
-        this.siteCapacity = site.getSiteCapacity();
-        this.mapImage = site.getMapImage();
-        this.policy = site.getPolicy();
-        this.price = site.getPrice();
-        this.refundableDate = site.getRefundableDate();
+//        this.rpImage = site.getRpImage();
+//        this.introduction = site.getIntroduction();
+//        this.type = site.getSiteType();
+//        this.openYn = site.isOpenYn();
+//        this.siteYn = site.getSiteYn();
+//        this.checkIn = site.getCheckIn();
+//        this.checkOut = site.getCheckOut();
+//        this.leastScheduling = site.getLeastScheduling();
+//        this.siteCapacity = site.getSiteCapacity();
+//        this.mapImage = site.getMapImage();
+//        this.policy = site.getPolicy();
+//        this.price = site.getPrice();
+//        this.refundableDate = site.getRefundableDate();
         this.campLogDtoList = site.getCampLogList()
             .stream().map(CampLogDto::new).collect(Collectors.toList());
     }

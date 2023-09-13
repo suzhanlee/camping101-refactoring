@@ -1,4 +1,4 @@
-package com.camping101.beta.db.entity.site;
+package com.camping101.beta.db.entity.site.enums;
 
 public enum SiteType {
 
@@ -6,6 +6,4 @@ public enum SiteType {
     AUTO,
     GLAMP,
     CARAV
-
-
 }

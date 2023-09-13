@@ -18,7 +18,7 @@ public class AttachFile {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "attachFile_id")
+    @Column(name = "id")
     private Long id;
 
     @Column(nullable = false)

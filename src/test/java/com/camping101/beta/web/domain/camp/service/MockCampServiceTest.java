@@ -82,6 +82,7 @@ class MockCampServiceTest {
     void saveCampTest() {
         // given
         Member mockMember = Member.createMockMember();
+
         List<CampOpenSeasonDto> campOpenSeasonDtoList = Arrays.asList(
             new CampOpenSeasonDto("AUTUMN"),
             new CampOpenSeasonDto("WINTER")
@@ -106,18 +107,18 @@ class MockCampServiceTest {
         );
 
         // when
+        //stub 1
+        Camp mockCamp = createMockCampAndRelation();
+        when(campRepository.save(any())).thenReturn(mockCamp);
 
-        //stub1
-        when(findMemberService.findMemberOrElseThrow(mockMember.getMemberId())).thenReturn(
-            mockMember);
-
-        //stub2
-        Camp camp = createMockCampAndRelation();
-
-        when(campRepository.save(any())).thenReturn(camp);
-        when(findCampService.findCampOrElseThrow(camp.getCampId())).thenReturn(camp);
+        //stub 2
+        when(findMemberService.findMemberOrElseThrow(mockMember.getMemberId())).thenReturn(mockMember);
 
         Long campId = campService.saveCamp(createCampRq);
+
+        //stub 3
+        when(findCampService.findCampOrElseThrow(campId)).thenReturn(mockCamp);
+
         Camp findCamp = findCampService.findCampOrElseThrow(campId);
 
         // then
@@ -212,33 +213,33 @@ class MockCampServiceTest {
 
         campService.modifyCamp(modifyCampRq);
 
-        Camp camp = findCampService.findCampOrElseThrow(modifyCampRq.getCampId());
+        Camp modifiedCamp = findCampService.findCampOrElseThrow(modifyCampRq.getCampId());
 
         // then
-        assertThat(camp.getName()).isEqualTo("서울캠핑장");
-        assertThat(camp.getIntro()).isEqualTo("서울캠핑장입니다!");
-        assertThat(camp.getPhoneNumber()).isEqualTo("010-5678-1234");
-        assertThat(camp.getBusinessNo()).isEqualTo("사업자번호2");
-        assertThat(camp.getCampReservationType()).isEqualTo(PHONE);
-        assertThat(camp.getAnimalCapabilityType()).isEqualTo(BAN);
-        assertThat(camp.getFirstImage()).isEqualTo(
+        assertThat(modifiedCamp.getName()).isEqualTo("서울캠핑장");
+        assertThat(modifiedCamp.getIntro()).isEqualTo("서울캠핑장입니다!");
+        assertThat(modifiedCamp.getPhoneNumber()).isEqualTo("010-5678-1234");
+        assertThat(modifiedCamp.getBusinessNo()).isEqualTo("사업자번호2");
+        assertThat(modifiedCamp.getCampReservationType()).isEqualTo(PHONE);
+        assertThat(modifiedCamp.getAnimalCapabilityType()).isEqualTo(BAN);
+        assertThat(modifiedCamp.getFirstImage()).isEqualTo(
             new AttachFile("fileUid2", "fileName2", "filePath2", 20)
         );
-        assertThat(camp.getCampLocation()).isEqualTo(
+        assertThat(modifiedCamp.getCampLocation()).isEqualTo(
             new CampLocation("산", "서울시", "강남구", "1357", "5678")
         );
-        assertThat(camp.getCampDetail()).isEqualTo(
+        assertThat(modifiedCamp.getCampDetail()).isEqualTo(
             new CampDetail("망치, 가위", "www.camping1012.com")
         );
-        assertThat(camp.getCampOpenSeasons())
+        assertThat(modifiedCamp.getCampOpenSeasons())
             .extracting("season")
             .containsExactlyInAnyOrder(SPRING, SUMMER);
 
-        assertThat(camp.getCampOpenDays())
+        assertThat(modifiedCamp.getCampOpenDays())
             .extracting("dayOfTheWeek")
             .containsExactlyInAnyOrder(THURSDAY, FRIDAY);
 
-        assertThat(camp.getCampFacilities())
+        assertThat(modifiedCamp.getCampFacilities())
             .extracting("facility", "facilityNum")
             .containsExactlyInAnyOrder(tuple(TOILET, 2), tuple(WATERPROOF, 4));
     }

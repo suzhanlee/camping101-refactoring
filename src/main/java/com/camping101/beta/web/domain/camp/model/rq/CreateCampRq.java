@@ -16,6 +16,7 @@ import com.camping101.beta.web.domain.camp.model.dto.CampOpenDayDto;
 import com.camping101.beta.web.domain.camp.model.dto.CampOpenSeasonDto;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

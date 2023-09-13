@@ -31,8 +31,7 @@ public class CampService {
 
     public Long saveCamp(CreateCampRq rq) {
 
-        Camp camp = rq.toEntity();
-        Camp savedCamp = campRepository.save(camp);
+        Camp savedCamp = campRepository.save(rq.toEntity());
 
         Member findMember = findMemberService.findMemberOrElseThrow(rq.getMemberId());
         findMember.addCamp(savedCamp);

@@ -2,7 +2,7 @@ package com.camping101.beta.web.domain.camp.model.campdetaildto;
 
 import com.camping101.beta.db.entity.site.Site;
 import com.camping101.beta.db.entity.site.SiteCapacity;
-import com.camping101.beta.db.entity.site.SiteType;
+import com.camping101.beta.db.entity.site.enums.SiteType;
 import com.querydsl.core.annotations.QueryProjection;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,14 +30,14 @@ public class SiteInCamp {
     public SiteInCamp(Site site) {
         this.siteId = site.getSiteId();
         this.name = site.getName();
-        this.rpImage = site.getRpImage();
-        this.introduction = site.getIntroduction();
-        this.type = site.getType();
-        this.openYn = site.isOpenYn();
-        this.checkIn = site.getCheckIn();
-        this.checkOut = site.getCheckOut();
-        this.leastScheduling = site.getLeastScheduling();
-        this.siteCapacity = site.getSiteCapacity();
+//        this.rpImage = site.getRpImage();
+//        this.introduction = site.getIntroduction();
+//        this.type = site.getSiteType();
+//        this.openYn = site.isOpenYn();
+//        this.checkIn = site.getCheckIn();
+//        this.checkOut = site.getCheckOut();
+//        this.leastScheduling = site.getLeastScheduling();
+//        this.siteCapacity = site.getSiteCapacity();
         this.price = site.getPrice();
         this.reservationInSiteList = site.getReservationList().stream()
             .map(ReservationInSite::createReservationInSite).collect(Collectors.toList());

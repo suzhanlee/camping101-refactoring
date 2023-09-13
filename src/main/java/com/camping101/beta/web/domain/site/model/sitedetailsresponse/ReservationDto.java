@@ -1,4 +1,4 @@
-package com.camping101.beta.web.domain.site.dto.sitedetailsresponse;
+package com.camping101.beta.web.domain.site.model.sitedetailsresponse;
 
 import com.camping101.beta.db.entity.reservation.Reservation;
 import com.camping101.beta.db.entity.reservation.ReservationStatus;

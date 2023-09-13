@@ -2,7 +2,7 @@ package com.camping101.beta.web.domain.camp.model.rs;
 
 import com.camping101.beta.db.entity.camp.Camp;
 import com.camping101.beta.db.entity.camp.CampLocation;
-import com.camping101.beta.db.entity.camp.ManageStatus;
+import com.camping101.beta.db.entity.camp.enums.CampManageStatus;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +14,7 @@ public class FindCampListRs {
     private String campName;
     private Long campId;
     private String intro;
-    private ManageStatus manageStatus;
+    private CampManageStatus campManageStatus;
     private CampLocation campLocation;
     private String openSeason;
     private String animalCapable;
@@ -27,7 +27,7 @@ public class FindCampListRs {
             .campId(camp.getCampId())
             .campName(camp.getName())
             .intro(camp.getIntro())
-            .manageStatus(camp.getManageStatus())
+            .campManageStatus(camp.getCampManageStatus())
             .campLocation(camp.getCampLocation())
 //            .openSeason(camp.getOpenSeason())
 //            .animalCapable(camp.getAnimalCapable())
@@ -37,13 +37,13 @@ public class FindCampListRs {
     }
 
     @QueryProjection
-    public FindCampListRs(String campName, Long campId, String intro, ManageStatus manageStatus,
+    public FindCampListRs(String campName, Long campId, String intro, CampManageStatus campManageStatus,
         CampLocation campLocation, String openSeason, String animalCapable, String firstImage,
         Long campLogCnt) {
         this.campName = campName;
         this.campId = campId;
         this.intro = intro;
-        this.manageStatus = manageStatus;
+        this.campManageStatus = campManageStatus;
         this.campLocation = campLocation;
         this.openSeason = openSeason;
         this.animalCapable = animalCapable;
